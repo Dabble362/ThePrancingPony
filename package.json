@@ -8,5 +8,8 @@
     "start": "node server.js"
   },
   "author": "daniel bennett",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "figlet": "^1.5.2"
+  }
 }
