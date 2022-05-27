@@ -1,0 +1,12 @@
+{
+  "name": "class37project",
+  "version": "1.0.0",
+  "description": "full stack group project app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "daniel bennett",
+  "license": "ISC"
+}
