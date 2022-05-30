@@ -9,6 +9,22 @@ const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
+  if (req.url.match(/.png$/)) {
+    //if the file matches the .png at the end
+    //we assume is in the public folder for now
+    let pngPath = path.join(__dirname, "/", req.url);
+    //we create the read stream, but without the encoding
+    let pngReadStream = fs.createReadStream(pngPath);
+
+    //we send the headers
+    res.statusCode = 200;
+    //we send the correct content-type
+    //in this case image/png
+    res.setHeader("Content-Type", "image/png");
+
+    //we add the stream to the response
+    pngReadStream.pipe(res);
+  }
   if (page == "/") {
     fs.readFile("index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
@@ -55,7 +71,7 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   } else if (page == "/js/main.js") {
-    fs.readFile("js/main.js", function (err, data) {
+    fs.readFile("/js/main.js", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/javascript" });
       res.write(data);
       res.end();
@@ -70,22 +86,6 @@ const server = http.createServer((req, res) => {
       res.write(data);
       res.end();
     });
-  }
-  if (req.url.match(/.png$/)) {
-    //if the file matches the .svg at the end
-    //we assume is in the public folder for now
-    let svgPath = path.join(__dirname, "/", req.url);
-    //we create the read stream, but without the encoding
-    let svgReadStream = fs.createReadStream(svgPath);
-
-    //we send the headers
-    res.statusCode = 200;
-    //we send the correct content-type
-    //in this case image/svg
-    res.setHeader("Content-Type", "image/svg");
-
-    //we add the stream to the response
-    svgReadStream.pipe(res);
   }
 });
 
