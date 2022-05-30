@@ -1,54 +1,9 @@
+const path = require("path");
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
 const querystring = require("querystring");
 const figlet = require("figlet");
-const multer = require("multer");
-
-//multer options
-const path = require("path");
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const fileFilter = (req, file, cb) => {
-  const allowedMimes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
-
-  if (allowedMimes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    return cb(new Error("Invalid file type."), false);
-  }
-};
-
-const maxSize = 5 * 1024 * 1024;
-
-const fileLimits = {
-  fileSize: maxSize,
-  files: 4,
-  fileSize: maxSize,
-};
-
-const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: fileLimits,
-});
-
-module.exports = {
-  upload,
-};
-
-// end multer options
 
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
@@ -116,48 +71,22 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   }
-  // Parsing the URL
-  var request = url.parse(req.url, true);
+  if (req.url.match(/.png$/)) {
+    //if the file matches the .svg at the end
+    //we assume is in the public folder for now
+    let svgPath = path.join(__dirname, "/", req.url);
+    //we create the read stream, but without the encoding
+    let svgReadStream = fs.createReadStream(svgPath);
 
-  // Extracting the path of file
-  var action = request.pathname;
+    //we send the headers
+    res.statusCode = 200;
+    //we send the correct content-type
+    //in this case image/svg
+    res.setHeader("Content-Type", "image/svg");
 
-  // Path Refinements
-  var filePath = path.join(__dirname, action).split("%20").join(" ");
-
-  // Checking if the path exists
-  fs.exists(filePath, function (exists) {
-    if (!exists) {
-      res.writeHead(404, {
-        "Content-Type": "text/plain",
-      });
-      res.end("404 Not Found");
-      return;
-    }
-
-    // Extracting file extension
-    var ext = path.extname(action);
-
-    // Setting default Content-Type
-    var contentType = "text/plain";
-
-    // Checking if the extension of
-    // image is '.png'
-    if (ext === ".png") {
-      contentType = "image/png";
-    }
-
-    // Setting the headers
-    res.writeHead(200, {
-      "Content-Type": contentType,
-    });
-
-    // Reading the file
-    fs.readFile(filePath, function (err, content) {
-      // Serving the image
-      res.end(content);
-    });
-  });
+    //we add the stream to the response
+    svgReadStream.pipe(res);
+  }
 });
 
 server.listen(8000);
