@@ -9,7 +9,13 @@ const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
-  if (req.url.match(/.png$/)) {
+  if (page.match("/character")) {
+    fs.readFile("./character1.html", function (err, data) {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(data);
+      res.end();
+    });
+  } else if (page.match(/.png$/)) {
     //if the file matches the .png at the end
     //we assume is in the public folder for now
     let pngPath = path.join(__dirname, "/", req.url);
@@ -24,21 +30,20 @@ const server = http.createServer((req, res) => {
 
     //we add the stream to the response
     pngReadStream.pipe(res);
-  }
-  if (page == "/") {
-    fs.readFile("index.html", function (err, data) {
+  } else if (page == "/") {
+    fs.readFile("./index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.write(data);
       res.end();
     });
   } else if (page == "/otherpage") {
-    fs.readFile("otherpage.html", function (err, data) {
+    fs.readFile("./otherpage.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.write(data);
       res.end();
     });
   } else if (page == "/otherotherpage") {
-    fs.readFile("otherotherpage.html", function (err, data) {
+    fs.readFile("./otherotherpage.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.write(data);
       res.end();
@@ -66,13 +71,13 @@ const server = http.createServer((req, res) => {
     } //student if
   } //else if
   else if (page == "/css/style.css") {
-    fs.readFile("css/style.css", function (err, data) {
+    fs.readFile("./css/style.css", function (err, data) {
       res.write(data);
       res.end();
     });
   } else if (page == "/js/main.js") {
-    fs.readFile("/js/main.js", function (err, data) {
-      res.writeHead(200, { "Content-Type": "text/javascript" });
+    fs.readFile("./js/main.js", function (err, data) {
+      res.writeHead(200, { "Content-Type": "application/javascript" });
       res.write(data);
       res.end();
     });
@@ -88,5 +93,5 @@ const server = http.createServer((req, res) => {
     });
   }
 });
-
+console.log(`The server is up and running on http://localhost:8000`);
 server.listen(8000);
