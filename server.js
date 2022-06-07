@@ -9,27 +9,30 @@ const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
-  if (page.match("/character")) {
+  if (page.match("/characters/1")) {
     fs.readFile("./character1.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.write(data);
       res.end();
     });
+  } else if (page.match("/characters/2")) {
+    fs.readFile("./character2.html", function (err, data) {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(data);
+      res.end();
+    });
+  } else if (page.match("/characters/3")) {
+    fs.readFile("./character3.html", function (err, data) {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(data);
+      res.end();
+    });
   } else if (page.match(/.png$/)) {
-    //if the file matches the .png at the end
-    //we assume is in the public folder for now
-    let pngPath = path.join(__dirname, "/", req.url);
-    //we create the read stream, but without the encoding
-    let pngReadStream = fs.createReadStream(pngPath);
-
-    //we send the headers
-    res.statusCode = 200;
-    //we send the correct content-type
-    //in this case image/png
-    res.setHeader("Content-Type", "image/png");
-
-    //we add the stream to the response
-    pngReadStream.pipe(res);
+    fs.readFile(pngPath, function (err, data) {
+      res.writeHead(200, { "Content-Type": "image/png" });
+      res.write(data);
+      res.end();
+    });
   } else if (page == "/") {
     fs.readFile("./index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
@@ -58,8 +61,7 @@ const server = http.createServer((req, res) => {
           currentOccupation: "Baller",
         };
         res.end(JSON.stringify(objToJson));
-      } //student = leon
-      else if (params["student"] != "leon") {
+      } else if (params["student"] != "leon") {
         res.writeHead(200, { "Content-Type": "application/json" });
         const objToJson = {
           name: "unknown",
@@ -67,10 +69,9 @@ const server = http.createServer((req, res) => {
           currentOccupation: "unknown",
         };
         res.end(JSON.stringify(objToJson));
-      } //student != leon
-    } //student if
-  } //else if
-  else if (page == "/css/style.css") {
+      }
+    }
+  } else if (page == "/css/style.css") {
     fs.readFile("./css/style.css", function (err, data) {
       res.write(data);
       res.end();
