@@ -7,7 +7,6 @@ const figlet = require("figlet");
 
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
-  const pngPath = "./images/";
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
   if (page.match("/characters/1")) {
@@ -28,12 +27,12 @@ const server = http.createServer((req, res) => {
       res.write(data);
       res.end();
     });
-  } else if (page.match(/.png$/)) {
-    fs.readFile(pngPath, function (err, data) {
-      res.writeHead(200, { "Content-Type": "image/png" });
-      res.write(data);
-      res.end();
-    });
+    // } else if (page.match(".png")) {
+    //   fs.readFile("./images", function (err, data) {
+    //     res.writeHead(200, { "Content-Type": "image/png" });
+    //     res.write(data);
+    //     res.end();
+    //   });
   } else if (page == "/") {
     fs.readFile("./index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
