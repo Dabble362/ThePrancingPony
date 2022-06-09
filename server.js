@@ -7,6 +7,7 @@ const figlet = require("figlet");
 
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
+  const pngPath = "./images/";
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
   if (page.match("/characters/1")) {
