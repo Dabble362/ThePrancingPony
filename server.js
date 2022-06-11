@@ -27,12 +27,19 @@ const server = http.createServer((req, res) => {
       res.write(data);
       res.end();
     });
-    // } else if (page.match(".png")) {
+    // } else if (page.match(/png$/)) {
     //   fs.readFile("./images", function (err, data) {
     //     res.writeHead(200, { "Content-Type": "image/png" });
     //     res.write(data);
     //     res.end();
     //   });
+  } else if (page == "./images/astrologer.png") {
+    fs.readFile("./images/astrologer.png", function (err, data) {
+      console.log(data);
+      res.writeHead(200, { "Content-type": "text/html" });
+      res.write(data);
+      res.end();
+    });
   } else if (page == "/") {
     fs.readFile("./index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
