@@ -8,7 +8,6 @@ const figlet = require("figlet");
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
-  console.log(page);
   if (page.match("/characters/1")) {
     fs.readFile("./character1.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
@@ -38,7 +37,7 @@ const server = http.createServer((req, res) => {
       console.log(data);
       res.writeHead(200, { "Content-type": "text/html" });
       res.write(data);
-      console.log(res);
+
       res.end();
     });
   } else if (page == "/") {
