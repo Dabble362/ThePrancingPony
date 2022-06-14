@@ -38,6 +38,7 @@ div {
 }
 section.chooseCharacter,
 .characterCard,
+.characterBlurb,
 body {
   display: flex;
   align-items: center;
@@ -46,12 +47,16 @@ section.chooseCharacter {
   justify-content: space-around;
 }
 .characterCard,
+.characterBlurb,
 body {
   flex-direction: column;
 }
 footer {
 }
-
+.characterBlurb > h1,
+p {
+  text-decoration-color: gold;
+}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
