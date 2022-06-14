@@ -32,12 +32,25 @@ const server = http.createServer((req, res) => {
     //     res.write(data);
     //     res.end();
     //   });
-  } else if (page == "./images/astrologer.png") {
+  } else if (page.match(/astrologer.png$/)) {
     fs.readFile("./images/astrologer.png", function (err, data) {
       console.log(data);
-      res.writeHead(200, { "Content-type": "text/html" });
+      res.writeHead(200, { "Content-type": "image/png" });
       res.write(data);
-
+      res.end();
+    });
+  } else if (page.match(/vagabond.png$/)) {
+    fs.readFile("./images/vagabond.png", function (err, data) {
+      console.log(data);
+      res.writeHead(200, { "Content-type": "image/png" });
+      res.write(data);
+      res.end();
+    });
+  } else if (page.match(/prophet.png$/)) {
+    fs.readFile("./images/prophet.png", function (err, data) {
+      console.log(data);
+      res.writeHead(200, { "Content-type": "image/png" });
+      res.write(data);
       res.end();
     });
   } else if (page == "/") {
