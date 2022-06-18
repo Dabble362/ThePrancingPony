@@ -38,8 +38,7 @@ div {
 }
 section.chooseCharacter,
 .characterCard,
-.characterBlurb,
-body {
+.characterBlurb {
   display: flex;
   align-items: center;
 }
@@ -49,7 +48,10 @@ section.chooseCharacter {
 .characterCard,
 .characterBlurb,
 body {
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 footer {
 }
