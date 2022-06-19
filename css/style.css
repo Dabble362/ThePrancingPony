@@ -32,6 +32,9 @@ header {
 body {
   background: black;
 }
+h1 {
+  margin: 5vh 0 10vh 0vh;
+}
 h1,
 h2,
 div {
@@ -39,9 +42,6 @@ div {
   color: goldenrod;
 }
 
-div {
-  margin-top: 10vh;
-}
 section.chooseCharacter,
 .characterCard,
 .characterBlurb {
@@ -50,6 +50,7 @@ section.chooseCharacter,
 }
 section.chooseCharacter {
   justify-content: space-around;
+  margin: 10vh 0vh;
 }
 .characterCard,
 .characterBlurb,
