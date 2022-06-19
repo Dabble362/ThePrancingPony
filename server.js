@@ -8,6 +8,8 @@ const figlet = require("figlet");
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
+  /** Routing */
+  /** /////// */
   if (page.match("/characters/1")) {
     fs.readFile("./character1.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html" });
@@ -26,12 +28,6 @@ const server = http.createServer((req, res) => {
       res.write(data);
       res.end();
     });
-    // } else if (page.match(/png$/)) {
-    //   fs.readFile("./images", function (err, data) {
-    //     res.writeHead(200, { "Content-Type": "image/png" });
-    //     res.write(data);
-    //     res.end();
-    //   });
   } else if (page.match(/astrologer.png$/)) {
     fs.readFile("./images/astrologer.png", function (err, data) {
       console.log(data);
