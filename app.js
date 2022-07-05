@@ -10,15 +10,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/charactera", (req, res) => {
-  res.sendFile(__dirname + "/charactera.html");
+  res.sendFile(__dirname + "/characterA.html");
 });
 
 app.get("/character2", (req, res) => {
-  res.sendFile(__dirname + "/character2.html");
+  res.sendFile(__dirname + "/characterB.html");
 });
 
 app.get("/character3", (req, res) => {
-  res.sendFile(__dirname + "/character3.html");
+  res.sendFile(__dirname + "/characterC.html");
 });
 
 app.listen(port, () => {
