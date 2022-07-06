@@ -9,16 +9,16 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/charactera", (req, res) => {
-  res.sendFile(__dirname + "/characterA.html");
+app.get("/characterA", (req, res) => {
+  res.sendFile(__dirname + "/views/characterA.html");
 });
 
-app.get("/character2", (req, res) => {
-  res.sendFile(__dirname + "/characterB.html");
+app.get("/characterB", (req, res) => {
+  res.sendFile(__dirname + "/views/characterB.html");
 });
 
-app.get("/character3", (req, res) => {
-  res.sendFile(__dirname + "/characterC.html");
+app.get("/characterC", (req, res) => {
+  res.sendFile(__dirname + "/views/characterC.html");
 });
 
 app.listen(port, () => {
