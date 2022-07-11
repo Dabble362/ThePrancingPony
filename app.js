@@ -23,6 +23,10 @@ app.get("/characterC", (req, res) => {
   res.sendFile("/characterC.html");
 });
 
+app.get("/character", (request, response, next) => {
+  app.render("character");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
