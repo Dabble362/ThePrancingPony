@@ -1,24 +1,26 @@
+const { response } = require("express");
 const express = require("express");
 const app = express();
 const port = 3000;
 
 app.use(express.static("public"));
-app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/views"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/characterA", (req, res) => {
-  res.sendFile(__dirname + "/views/characterA.html");
+app.get(__dirname + "/characterA", (req, res) => {
+  res.sendFile("/views/characterA.html");
 });
 
-app.get("/characterB", (req, res) => {
-  res.sendFile(__dirname + "/views/characterB.html");
+app.get("/characterB", (request, response) => {
+  res.sendFile("/characterB.html");
 });
 
 app.get("/characterC", (req, res) => {
-  res.sendFile(__dirname + "/views/characterC.html");
+  res.sendFile("/characterC.html");
 });
 
 app.listen(port, () => {
