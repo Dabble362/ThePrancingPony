@@ -13,14 +13,17 @@ app.get("/", (req, res) => {
 
 app.get(__dirname + "/characterA", (req, res) => {
   res.sendFile("/views/characterA.html");
+  console.log(response);
 });
 
 app.get("/characterB", (request, response) => {
   res.sendFile("/characterB.html");
+  console.log(response);
 });
 
 app.get("/characterC", (req, res) => {
   res.sendFile("/characterC.html");
+  console.log(response);
 });
 
 app.get("/character", (request, response, next) => {
