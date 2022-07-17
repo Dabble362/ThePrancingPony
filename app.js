@@ -1,35 +1,25 @@
-const { response } = require("express");
 const express = require("express");
 const app = express();
-const port = 3000;
 
 app.use(express.static("public"));
-// app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/views"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get(__dirname + "/characterA", (req, res) => {
-  res.sendFile("/views/characterA.html");
-  console.log(response);
+app.get("/characterA", (req, res) => {
+  res.sendFile(__dirname + "/views/characterA.html");
 });
 
-app.get("/characterB", (request, response) => {
-  res.sendFile("/characterB.html");
-  console.log(response);
+app.get("/characterB", (req, res) => {
+  res.sendFile(__dirname + "/views/characterB.html");
 });
 
 app.get("/characterC", (req, res) => {
-  res.sendFile("/characterC.html");
-  console.log(response);
+  res.sendFile(__dirname + "/views/characterC.html");
 });
 
-app.get("/character", (request, response, next) => {
-  app.render("character");
-});
-
+const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
