@@ -1,32 +1,47 @@
-document.querySelector("#astrologer").addEventListener("click", storeName);
-document.querySelector("#vagabond").addEventListener("click", storeName);
-document.querySelector("#prophet").addEventListener("click", storeName);
-
-function storeName() {
-  const userName = document.getElementById("charName").value;
-  console.log(userName);
-  return userName;
+function maybeBindEventListener(selector, eventName, callback) {
+  if (document.querySelector(selector)) {
+    document.querySelector(selector).addEventListener(eventName, callback);
+  }
+  displayName();
 }
 
-// async function makeReq() {
-//   const userName = document.querySelector("#charName").value;
-//   const res = await fetch(`/api?student=${userName}`);
-//   const data = await res.json();
+function storeName() {
+  const characterName = window.localStorage.setItem(
+    "characterName",
+    document.getElementById("characterName").value
+  );
+  console.log(characterName);
+  return characterName;
+}
 
-//   console.log(data);
-//   document.querySelector("#personName").textContent = data.name;
-//   document.querySelector("#personStatus").textContent = data.status;
-//   document.querySelector("#personOccupation").textContent =
-//     data.currentOccupation;
-// }
-// fetch("https://dog.ceo/api/breeds/image/random")
-//   .then((res) => res.json()) // parse response as JSON
-//   .then((data) => {
-//     console.log(data.message);
-//     document.querySelector("img").src = data.message;
-//   })
-//   .catch((err) => {
-//     console.log(`error ${err}`);
-//   });
+function displayName() {
+  const characterName = window.localStorage.getItem("characterName");
+  if (document.getElementById("savedCharacterName")) {
+    document.getElementById(
+      "savedCharacterName"
+    ).innerText = `${characterName}`;
+  }
+}
 
-//  //api.name-fake.com/random/random.
+function rollAbilityScores() {
+  let min = 6,
+    sum = 0,
+    abilityScoreValue = 0;
+
+  for (let i = 0; i < 4; i++) {
+    let diceRoll = Math.floor(Math.random() * 6) + 1;
+
+    sum += diceRoll;
+
+    if (diceRoll < min) {
+      min = diceRoll;
+    }
+  }
+  abilityScoreValue = sum - min;
+  return abilityScoreValue;
+}
+
+maybeBindEventListener("#astrologer", "click", storeName);
+maybeBindEventListener("#vagabond", "click", storeName);
+maybeBindEventListener("#prophet", "click", storeName);
+displayName();
