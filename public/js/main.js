@@ -23,22 +23,68 @@ function displayName() {
   }
 }
 
-function rollAbilityScores() {
-  let min = 6,
-    sum = 0,
-    abilityScoreValue = 0;
+const abilityModifier = (score) => {
+  if (score < 3) throw new Error(`Ability scores must be at least 3`);
+  if (score > 18) throw new Error(`Ability scores can be at most 18`);
+  return Math.floor((score - 10) / 2);
+};
 
-  for (let i = 0; i < 4; i++) {
-    let diceRoll = Math.floor(Math.random() * 6) + 1;
+class Character {
+  static rollAbilityScores() {
+    let min = 6,
+      sum = 0,
+      abilityScoreValue = 0;
 
-    sum += diceRoll;
+    for (let i = 0; i < 4; i++) {
+      let diceRoll = Math.floor(Math.random() * 6) + 1;
 
-    if (diceRoll < min) {
-      min = diceRoll;
+      sum += diceRoll;
+
+      if (diceRoll < min) {
+        min = diceRoll;
+      }
     }
+    abilityScoreValue = sum - min;
+    return abilityScoreValue;
   }
-  abilityScoreValue = sum - min;
-  return abilityScoreValue;
+
+  #STR;
+  #DEX;
+  #CON;
+  #INT;
+  #WIS;
+  #CHA;
+
+  constructor() {
+    this.#STR = Character.rollAbilityScores();
+    this.#DEX = Character.rollAbilityScores();
+    this.#CON = Character.rollAbilityScores();
+    this.#INT = Character.rollAbilityScores();
+    this.#WIS = Character.rollAbilityScores();
+    this.#CHA = Character.rollAbilityScores();
+  }
+
+  get strength() {
+    return this.#STR;
+  }
+  get dexterity() {
+    return this.#DEX;
+  }
+  get constitution() {
+    return this.#CON;
+  }
+  get intelligence() {
+    return this.#INT;
+  }
+  get wisdom() {
+    return this.#WIS;
+  }
+  get charisma() {
+    return this.#CHA;
+  }
+  get hitpoints() {
+    return 10 + abilityModifier(this.#CON);
+  }
 }
 
 maybeBindEventListener("#astrologer", "click", storeName);
