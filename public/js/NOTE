@@ -1,0 +1,69 @@
+export const abilityModifier = (score) => {
+  if (score < 3) throw new Error(`Ability scores must be at least 3`);
+  if (score > 18) throw new Error(`Ability scores can be at most 18`);
+  return Math.floor((score - 10) / 2);
+};
+export class Character {
+  // Static methods
+  // Rolls 4 6-sided dice, discards the lowest number, and returns the sum
+  // (Will be a value between 3 (three ones) and 18 (three sixes))
+  static rollAbility() {
+    // Local variables: <min> to store minimum roll value, <sum> for total
+    let min = 6,
+      sum = 0;
+    // Loop four times:
+    for (let i = 0; i < 4; i++) {
+      // Set roll equal to a random value between 1 and 6 (inclusive)
+      let roll = Math.floor(Math.random() * 6) + 1;
+      // Add the roll to the total
+      sum += roll;
+      // If the roll is less than the current minimum value, it is set to
+      // be the new minimum value
+      if (roll < min) min = roll;
+    }
+    // Return the total of the four rolls minus the lowest value rolled
+    return sum - min;
+  }
+  // Define private instance variables
+  #STR;
+  #DEX;
+  #CON;
+  #INT;
+  #WIS;
+  #CHA;
+
+  // Constructor: New character is assigned a random ability roll to
+  // each of the six primary stats
+  constructor() {
+    this.#STR = Character.rollAbility();
+    this.#DEX = Character.rollAbility();
+    this.#CON = Character.rollAbility();
+    this.#INT = Character.rollAbility();
+    this.#WIS = Character.rollAbility();
+    this.#CHA = Character.rollAbility();
+  }
+
+  // Getters for six basic stats
+  get strength() {
+    return this.#STR;
+  }
+  get dexterity() {
+    return this.#DEX;
+  }
+  get constitution() {
+    return this.#CON;
+  }
+  get intelligence() {
+    return this.#INT;
+  }
+  get wisdom() {
+    return this.#WIS;
+  }
+  get charisma() {
+    return this.#CHA;
+  }
+  // Getter for HP (10 + the ability modifier of constitution)
+  get hitpoints() {
+    return 10 + abilityModifier(this.#CON);
+  }
+}
