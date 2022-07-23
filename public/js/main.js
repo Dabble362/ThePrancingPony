@@ -77,14 +77,19 @@ class Character {
     return this.#INT;
   }
   get wisdom() {
-    return this.#WIS;
-  }
-  get charisma() {
     return this.#CHA;
   }
   get hitpoints() {
     return 10 + abilityModifier(this.#CON);
   }
+}
+//create a function that displays data generated new class declarations
+//
+//$ git config --global user.name "John Doe"
+//$ git config --global user.email johndoe@example.com
+function DisplayClassData() {
+  const UserChar = new Character();
+  document.getElementById("str")innerText()
 }
 
 maybeBindEventListener("#astrologer", "click", storeName);
