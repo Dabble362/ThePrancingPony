@@ -89,7 +89,7 @@ class Character {
 //$ git config --global user.email johndoe@example.com
 function DisplayClassData() {
   const UserChar = new Character();
-  document.getElementById("str")innerText()
+  document.getElementById("str")()
 }
 
 maybeBindEventListener("#astrologer", "click", storeName);
