@@ -76,6 +76,13 @@ p {
   background-color: rgb(35, 35, 35);
   color: goldenrod;
 }
+.abilityNames h3,.scoreValues h3{
+  color: goldenrod;
+} 
+.characterBlurb p {
+  color: goldenrod;
+}
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/

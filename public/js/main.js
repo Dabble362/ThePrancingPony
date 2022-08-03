@@ -3,6 +3,7 @@ function maybeBindEventListener(selector, eventName, callback) {
     document.querySelector(selector).addEventListener(eventName, callback);
   }
   displayName();
+  DisplayClassData();
 }
 
 function storeName() {
@@ -77,6 +78,9 @@ class Character {
     return this.#INT;
   }
   get wisdom() {
+    return this.#WIS;
+  }
+  get charisma() {
     return this.#CHA;
   }
   get hitpoints() {
@@ -84,12 +88,22 @@ class Character {
   }
 }
 //create a function that displays data generated new class declarations
-//
-//$ git config --global user.name "John Doe"
-//$ git config --global user.email johndoe@example.com
 function DisplayClassData() {
-  const UserChar = new Character();
-  document.getElementById("str")()
+  let userData = new Character();
+  let strength = userData.strength,
+      dexterity= userData.dexterity,
+      constitution = userData.constitution,
+      intelligence = userData.intelligence,
+      wisdom = userData.wisdom,
+      charisma = userData.charisma;
+      hitPoints = userData.hitpoints;
+      document.getElementById('str').innerHTML = strength;
+      document.getElementById('dex').innerHTML = dexterity;
+      document.getElementById('con').innerHTML = constitution;
+      document.getElementById('int').innerHTML = intelligence;
+      document.getElementById('wis').innerHTML = wisdom;
+      document.getElementById('cha').innerHTML = charisma;
+      document.getElementById('hp').innerHTML = hitPoints;
 }
 
 maybeBindEventListener("#astrologer", "click", storeName);
