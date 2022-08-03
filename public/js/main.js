@@ -109,4 +109,5 @@ function DisplayClassData() {
 maybeBindEventListener("#astrologer", "click", storeName);
 maybeBindEventListener("#vagabond", "click", storeName);
 maybeBindEventListener("#prophet", "click", storeName);
+maybeBindEventListener("#reRoll", "click", DisplayClassData);
 displayName();

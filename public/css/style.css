@@ -52,8 +52,18 @@ section.chooseCharacter,
   align-items: center;
 }
 section.chooseCharacter {
-  justify-content: space-around;
+  justify-content: center;
   margin: 10vh 0vh;
+}
+
+section:nth-child(2) h3 {
+  padding: 0.25em 1em;
+  height: 100%;
+  width: 100%;
+}
+section:nth-child(2) {
+  display: flex;
+  padding-left: 01em;
 }
 .characterCard,
 .characterBlurb,
@@ -78,6 +88,7 @@ p {
 }
 .abilityNames h3,.scoreValues h3{
   color: goldenrod;
+  background-color: rgba(218, 165, 32, 0.352);
 } 
 .characterBlurb p {
   color: goldenrod;
