@@ -32,6 +32,14 @@ header {
 body {
   background: black;
 }
+ul {
+  list-style:none; 
+  justify-content: space-evenly;
+  padding-left: 0px;
+}
+li{
+  display: inline-flex;
+}
 h1 {
   margin: 5vh 0 7vh 0vh;
 }
@@ -45,14 +53,19 @@ div {
   flex-direction: column;
   align-items: center;
 }
-section.chooseCharacter,
+ul.chooseCharacter,
 .characterCard,
 .characterBlurb {
   display: flex;
   align-items: center;
 }
 section.chooseCharacter {
+  display: flex;
+  align-items: center;
   justify-content: center;
+  margin: 10vh 0vh;
+}
+ul.chooseCharacter {
   margin: 10vh 0vh;
 }
 
