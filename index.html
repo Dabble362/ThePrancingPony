@@ -35,6 +35,18 @@
         placeholder="Enter Name"
       />
     </div>
+    <section>
+      <form action="/authentication" method="POST">
+        <input type="text" placeholder="User Name" name="userName" />
+        <input type="text" placeholder="Password" name="pass" />
+        <button type="submit">Sign Up</button>
+      </form>
+      <form action="/authentication" method="GET">
+        <input type="text" placeholder="User Name" name="userName" />
+        <input type="text" placeholder="Password" name="pass" />
+        <button type="submit">Sign In</button>
+      </form>
+    </section>
 
     <script type="text/javascript" src="/js/main.js"></script>
   </body>
