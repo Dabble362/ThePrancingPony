@@ -5,6 +5,23 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const myPlaintextPassword = "s0//P4$$w0rD";
+const someOtherPlaintextPassword = "not_bacon";
+
+// To hash a password
+bcrypt.genSalt(saltRounds, function (err, salt) {
+  bcrypt.hash(myPlaintextPassword, salt, function (err, hash) {
+    // Store hash in your password DB.
+  });
+});
+
+// check a password
+bcrypt.compare(myPlaintextPassword, hash, function (err, result) {
+  // result == true
+});
+
 const MongoClient = require("mongodb").MongoClient;
 MongoClient.connect(
   "mongodb+srv://dab362:8EloquentDinosaur@cluster0.fl26cip.mongodb.net/?retryWrites=true&w=majority",
