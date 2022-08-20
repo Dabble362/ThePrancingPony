@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-require("dotenv").config;
+require("dotenv").config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -18,14 +18,15 @@ bcrypt.genSalt(saltRounds, function (err, salt) {
   });
 });
 
-// check a password
-bcrypt.compare(myPlaintextPassword, hash, function (err, result) {
-  // result == true
-});
+// // check a password
+// bcrypt.compare(myPlaintextPassword, hash, function (err, result) {
+//   // result == true
+// });
 
 const MongoClient = require("mongodb").MongoClient;
 MongoClient.connect(
-  "mongodb+srv://dab362:8EloquentDinosaur@cluster0.fl26cip.mongodb.net/?retryWrites=true&w=majority",
+  // process.env.DB_STRING
+  process.env.DB_STRING,
   {
     useUnifiedTopology: true,
   }
