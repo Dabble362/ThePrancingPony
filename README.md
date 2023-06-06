@@ -1,8 +1,7 @@
-# class37project
-README.txt
+
 My portfolio Website with projects and contact info
 
-https://www.daniel-bennett-portfolio.com
+(https://danielbennett.dev/)
 
 How It's Made:
 Tech used: HTML, CSS, JavaScript, ejs, express, mondgodb, mongoose
